@@ -1,4 +1,4 @@
-import { searchMovies, getPopularMovies } from "@/lib/tmdb";
+import { searchMovies, getPopularMovies, Movie } from "@/lib/tmdb";
 import MovieCard from "@/components/MovieCard";
 
 type PageProps = {
@@ -6,6 +6,8 @@ type PageProps = {
     q?: string;
   };
 };
+
+
 
 export default async function SearchPage({ searchParams }: PageProps) {
   const query = searchParams?.q?.trim();
@@ -16,7 +18,6 @@ export default async function SearchPage({ searchParams }: PageProps) {
 
   return (
     <main className="min-h-screen bg-[#10191d] px-6 pt-32 text-neutral-200">
-
       <h1 className="text-4xl md:text-6xl font-serif font-bold text-center mb-6">
         Search Movies
       </h1>
@@ -25,7 +26,6 @@ export default async function SearchPage({ searchParams }: PageProps) {
         Type a movie title and press Enter
       </p>
 
-      {/* SEARCH INPUT */}
       <form className="max-w-xl mx-auto mb-20">
         <input
           type="text"
@@ -43,21 +43,18 @@ export default async function SearchPage({ searchParams }: PageProps) {
         />
       </form>
 
-      {/* TITLE */}
       <h2 className="text-2xl font-serif text-center mb-10">
         {query ? `Results for “${query}”` : "Popular movies now"}
       </h2>
 
-      {/* EMPTY STATE */}
       {query && data?.results?.length === 0 && (
         <p className="text-center text-neutral-400">
           No movies found
         </p>
       )}
 
-      {/* MOVIES GRID */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-        {data?.results?.map((movie: any) => (
+        {data?.results?.map((movie: Movie) => (
           <MovieCard
             key={movie.id}
             id={movie.id}

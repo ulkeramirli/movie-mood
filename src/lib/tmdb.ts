@@ -92,3 +92,11 @@ export async function getPopularMovies() {
   return res.json();
 }
 
+export interface Movie {
+  id: number;
+  title: string;
+  poster_path: string | null;
+  overview?: string;
+  release_date?: string;
+  // добавь любые другие поля, которые используешь
+}
