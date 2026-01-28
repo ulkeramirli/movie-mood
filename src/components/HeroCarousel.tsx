@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Image from "next/image";
 
 interface Movie {
   id: number;
@@ -53,12 +54,14 @@ export default function HeroCarousel() {
       <Slider {...settings}>
         {movies.map((movie) => (
           <div key={movie.id} className="px-2 relative group">
-            <img
+            <Image
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title}
-              className="rounded-lg w-full h-[350px] object-cover transition-transform duration-300 group-hover:scale-105"
-              // width={400}
-              // height={500}
+              className="rounded-lg brightness-[0.8] w-full h-87.5 object-cover transition-transform duration-300 group-hover:scale-105"
+              fill
+              sizes="100vw"
+              priority
+
             />
             <div className="absolute bottom-4 left-2 right-2 bg-black/60 text-white p-2 rounded opacity-0 group-hover:opacity-100 transition-opacity">
               <h3 className="text-lg font-bold">{movie.title}</h3>
@@ -66,6 +69,7 @@ export default function HeroCarousel() {
             </div>
           </div>
         ))}
+        
       </Slider>
     </div>
   );

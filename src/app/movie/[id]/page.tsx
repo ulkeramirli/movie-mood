@@ -6,7 +6,6 @@ type PageProps = {
   params: Promise<{ id: string }>;
 };
 
-// 🎯 SEO
 export async function generateMetadata(
   { params }: PageProps
 ): Promise<Metadata> {
@@ -26,14 +25,14 @@ export default async function MoviePage({ params }: PageProps) {
   const videos = await getMovieVideos(id);
 
   const trailer = videos.results?.find(
-    (v: any) => v.type === "Trailer" && v.site === "YouTube"
+    (v: { type: string; site: string; key: string }) => v.type === "Trailer" && v.site === "YouTube"
   );
 
   return (
     <main className=" bg-black text-white">
-      {/* 🎬 HERO */}
+      
       <section className="relative h-[85vh] w-full overflow-hidden">
-        {/* BACKDROP */}
+       
         {movie.backdrop_path && (
           <Image
             src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
@@ -44,15 +43,12 @@ export default async function MoviePage({ params }: PageProps) {
           />
         )}
 
-        {/* OVERLAYS */}
         <div className="absolute inset-0 bg-black/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-
-        {/* CONTENT */}
+        <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
+       
         <div className="relative z-10 max-w-7xl mx-auto h-full px-6 flex items-end pb-20">
           <div className="flex flex-col md:flex-row gap-10">
-            {/* POSTER */}
-            <div className="hidden md:block w-[260px] shrink-0">
+            <div className="hidden md:block w-64 shrink-0">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
@@ -62,7 +58,6 @@ export default async function MoviePage({ params }: PageProps) {
               />
             </div>
 
-            {/* INFO */}
             <div className="max-w-2xl">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 {movie.title}
@@ -91,8 +86,7 @@ export default async function MoviePage({ params }: PageProps) {
           </div>
         </div>
       </section>
-
-      {/* 🎞 DETAILS */}
+      
       <section className="max-w-5xl mx-auto px-6 py-20">
         <h2 className="text-2xl font-semibold mb-6">
           About the movie
@@ -106,7 +100,7 @@ export default async function MoviePage({ params }: PageProps) {
           </div>
 
           <div>
-            <p><b>Genres:</b> {movie.genres.map((g: any) => g.name).join(", ")}</p>
+            <p><b>Genres:</b> {movie.genres.map((g: { id: number; name: string }) => g.name).join(", ")}</p>
             <p><b>Popularity:</b> {movie.popularity}</p>
           </div>
         </div>

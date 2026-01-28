@@ -11,7 +11,7 @@ type PageProps = {
   }>;
 };
 
-// ✅ SEO
+
 export async function generateMetadata(
   { params }: PageProps
 ): Promise<Metadata> {
@@ -32,7 +32,7 @@ export async function generateMetadata(
   };
 }
 
-// ✅ Page
+
 export default async function MoodPage({ params }: PageProps) {
   const { mood } = await params;
   const moodKey = mood.toLowerCase() as keyof typeof moods;
@@ -42,9 +42,7 @@ export default async function MoodPage({ params }: PageProps) {
     notFound();
   }
 
-  // 🔥 ТВОЯ ФИШКА: свои фильмы для каждого emoji
-  const curatedIds =
-    curatedMovies[moodKey as keyof typeof curatedMovies];
+  const curatedIds = curatedMovies[moodKey as keyof typeof curatedMovies];
 
   const movies = curatedIds
     ? await getMoviesByIds(curatedIds)
@@ -57,7 +55,7 @@ export default async function MoodPage({ params }: PageProps) {
       </h1>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-        {movies.map((movie: any) => (
+        {movies.map((movie: { id: number; title: string; poster_path: string }) => (
           <MovieCard
             key={movie.id}
             id={movie.id}

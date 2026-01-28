@@ -9,8 +9,14 @@ export async function GET(req: Request) {
 
   const data = await getMovieVideos(id);
 
+  interface Video {
+    site: string;
+    type: string;
+    key?: string;
+  }
+
   const trailer = data.results?.find(
-    (v: any) => v.site === "YouTube" && v.type === "Trailer"
+    (v: Video) => v.site === "YouTube" && v.type === "Trailer"
   );
 
   return NextResponse.json({ key: trailer?.key || null });

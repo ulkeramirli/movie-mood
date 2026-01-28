@@ -8,7 +8,6 @@ type PageProps = {
 };
 
 
-
 export default async function SearchPage({ searchParams }: PageProps) {
   const query = searchParams?.q?.trim();
 
@@ -32,14 +31,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
           name="q"
           defaultValue={query}
           placeholder="Search for a movie..."
-          className="
-            w-full rounded-full px-6 py-4
-            bg-[#0b1215] text-neutral-200
-            placeholder-neutral-500
-            border border-white/10
-            outline-none
-            focus:ring-2 focus:ring-white/30
-          "
+          className="w-full rounded-full px-6 py-4 bg-[#0b1215] text-neutral-200 placeholder-neutral-500 border border-white/10 outline-none focus:ring-2 focus:ring-white/30"
         />
       </form>
 

@@ -11,7 +11,7 @@ export default function Loading() {
             key={i}
             className="animate-pulse"
           >
-            <div className="h-[450px] rounded-xl bg-gray-200 mb-3" />
+            <div className="h-112.5 rounded-xl bg-gray-200 mb-3" />
             <div className="h-4 bg-gray-200 rounded w-3/4" />
           </div>
         ))}

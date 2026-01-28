@@ -18,11 +18,11 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Загружаем популярные фильмы
+ 
   useEffect(() => {
     async function fetchPopular() {
       try {
-        const res = await fetch("/api/hero"); // твой API должен возвращать popular movies
+        const res = await fetch("/api/hero"); 
         const data: Movie[] = await res.json();
         setHeroMovies(data);
       } catch (err) {
@@ -34,7 +34,7 @@ export default function Home() {
     fetchPopular();
   }, []);
 
-  // Автопереключение каждые 5 секунд
+  
   useEffect(() => {
     if (heroMovies.length === 0) return;
     const interval = setInterval(() => {
@@ -58,25 +58,27 @@ export default function Home() {
   { title: "Thriller", icon: "/icons/thriller.png", slug: "thriller" },
   { title: "Adventure", icon: "/icons/adventure.png", slug: "adventure" },
   { title: "Mystery", icon: "/icons/mystery.png", slug: "mystery" },
-  { title: "Dreamy", icon: "/icons/dreamy.png", slug: "dreamy" },
-  { title: "Mind-Blending", icon: "/icons/mind-blending.png", slug: "mind-blending" },
+  { title: "Family", icon: "/icons/family.png", slug: "family" },
+  { title: "Documentary", icon: "/icons/documentary.png", slug: "documentary" },
 ];
 
 
   return (
     <main className="min-h-screen bg-[#10191d] flex flex-col items-center text-center relative">
-      {/* HERO */}
+     
       {loading && <div className="text-white py-20">Загрузка фильмов...</div>}
       {!loading && heroMovies.length > 0 && (
         <div className="w-full h-[60vh] md:h-[92vh] mb-16 relative overflow-hidden">
-          {/* Фильм */}
-          <div className="relative w-full h-full transition-all duration-700">
+        
+          <div className="w-full h-[60vh] md:h-[92vh] relative">
             <Image
               src={`https://image.tmdb.org/t/p/original${heroMovies[currentIndex].backdrop_path}`}
               alt={heroMovies[currentIndex].title}
               fill
               sizes="100vw"
               className="object-cover brightness-[0.8]"
+              priority
+              
             />
             <div className="absolute inset-0 flex flex-col justify-center items-center text-white px-6">
               <h1 className="text-4xl md:text-6xl font-bold drop-shadow-lg mb-4">
@@ -88,7 +90,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Стрелки */}
+          
           <button
             onClick={handlePrev}
             className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl md:text-5xl font-bold px-3 pb-3 bg-black/50 rounded-full hover:bg-black/70 transition "
@@ -104,13 +106,13 @@ export default function Home() {
         </div>
       )}
 
-      {/* MOOD SECTION */}
+      
       <div className="min-h-screen flex flex-col items-center px-6 text-center pt-24">
-        <h1 className="text-5xl md:text-6xl text-neutral-200 font-bold font-serif mb-6 tracking-tight">
+        <h1 className="text-4xl md:text-5xl text-neutral-200 font-bold font-serif mb-6 tracking-tight">
           How are you feeling today? 🎬
         </h1>
 
-        <p className="text-lg font-serif text-neutral-200 max-w-xl mb-14 leading-relaxed">
+        <p className="text-lg font-serif text-gray-400 max-w-xl mb-14 leading-relaxed">
           Choose your mood and discover movies that match your emotions.
           Save favorites and explore cinema your way.
         </p>
